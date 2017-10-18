@@ -1,6 +1,6 @@
 {
   "name": "origami-admin-zen",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Default Admin UI for Origami CMS built with React",
   "main": "index.js",
   "repository": "https://github.com/origami-cms/admin-zen.git",
@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "css-loader": "^0.28.7",
+    "eslint": "^4.9.0",
     "eslint-plugin-prefer-object-spread": "^1.2.1",
     "eslint-plugin-react": "^7.4.0",
     "express": "^4.16.2",
@@ -28,7 +29,8 @@
     "redux-thunk": "^2.2.0",
     "sass-loader": "^6.0.6",
     "seamless-immutable": "^7.1.2",
-    "style-loader": "^0.19.0"
+    "style-loader": "^0.19.0",
+    "whatwg-fetch": "^2.0.3"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",

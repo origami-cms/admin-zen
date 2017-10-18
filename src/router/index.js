@@ -9,7 +9,6 @@ import Actions from 'actions';
 class Router extends React.Component {
 
     render() {
-        console.log(Login);
         return <BrowserRouter basename="/admin">
             <Switch>
                 <Route path="/login" render={props => <Login {...props}/>}></Route>

@@ -1,5 +1,5 @@
-import * as Login from './Login';
+import * as Auth from './Auth';
 
 export default {
-    Login
+    Auth
 };
