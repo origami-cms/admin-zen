@@ -23,7 +23,7 @@ export default class Resource {
             dispatch => {
                 dispatch({type: `${this.upper}_CREATING_START`});
 
-                return API.post(this.lower, data)
+                return API.post(`/${this.lower}`, data)
                     .then(json => {
                         dispatch({
                             type: `${this.upper}_CREATED`,
@@ -43,31 +43,31 @@ export default class Resource {
     get() {
         return (id, cache, pagination = {}, qs) =>
             dispatch => {
-                dispatch({type: `${this.upper}_LOADING_START`});
+                const loading = `${this.upper}_LOADING_${id ? 'SINGLE' : 'ALL'}_`;
+                dispatch({type: `${loading}START`});
 
                 const p = pagination || {};
                 if (!p.items) p.items = this.getSize;
                 const _qs = this._qs(p, qs);
 
-                return API.get(`${this.lower}/${id || ''}${_qs}`, cache)
+                return API.get(`/${this.lower}/${id || ''}${_qs}`, cache)
                     .then(json => {
                         const data = id ? [json.data] : json.data;
-
                         dispatch({
                             type: `${this.upper}_SET`,
                             [this.lower]: data,
-                            pages: json.pages,
-                            page: json.page,
-                            sort: json.sort,
-                            filter: json.filter
+                            _pages: json.pages,
+                            _page: json.page,
+                            _sort: json.sort,
+                            _filter: json.filter
                         });
-                        dispatch({type: `${this.upper}_LOADING_END`});
+                        dispatch({type: `${loading}END`});
 
                         return data;
                     })
                     .catch(error => {
                         dispatch({type: `${this.upper}_GET_ERROR`, error});
-                        dispatch({type: `${this.upper}_LOADING_END`});
+                        dispatch({type: `${loading}END`});
                     });
             };
     }
@@ -75,7 +75,7 @@ export default class Resource {
     update() {
         return (id, data) =>
             dispatch =>
-                API.put(`${this.lower}/${id}`, data)
+                API.put(`/${this.lower}/${id}`, data)
                     .then(json => {
                         dispatch({type: `${this.upper}_UPDATED`, [this.singular]: json.data, id});
 
@@ -89,7 +89,7 @@ export default class Resource {
     remove() {
         return id =>
             dispatch =>
-                API.delete(`${this.lower}/${id}`)
+                API.delete(`/${this.lower}/${id}`)
                     .then(() => {
                         dispatch({type: `${this.upper}_REMOVED`, id});
                     })
@@ -102,9 +102,7 @@ export default class Resource {
         // eslint-disable-next-line prefer-template
         return '?' +
             Object.entries(
-                [...rest].reduce((combine, obj) => {
-                    return {...combine, ...obj};
-                }, {})
+                [...rest].reduce((combine, obj) => ({...combine, ...obj}), {})
             )
                 .map(([key, value]) => `${key}=${value}`)
                 .join('&');

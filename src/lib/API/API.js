@@ -82,9 +82,10 @@ export default new class API {
         return fetch(this.base + url, conf)
             .then(r => r.json())
             .then(res => {
-                if (res.error) {
+                if (res.statusCode >= 400) {
                     const err = new Error(res.message);
                     err.code = res.statusCode;
+
                     throw err;
                 }
                 if (cache || this._cache[method][url]) {

@@ -8,8 +8,10 @@ module.exports = {
     entry: path.resolve('./src/main.js'),
     output: {
         path: PATH_DIST,
-        filename: 'admin.js'
+        filename: 'admin.js',
+        publicPath: '/admin/'
     },
+    devtool: 'eval-source-map',
     devServer: {
         contentBase: PATH_SRC,
         hot: true,
@@ -33,11 +35,16 @@ module.exports = {
             {
                 test: /\.scss$/,
                 loader: 'style-loader!css-loader!sass-loader'
+            },
+            {
+                test: /\.(svg|jpg|png)/,
+                loader: 'file-loader'
             }
         ]
     },
     resolve: {
         alias: {
+            'const': path.resolve(PATH_SRC, 'const'),
             'actions': path.resolve(PATH_SRC, 'actions'),
             'router': path.resolve(PATH_SRC, 'router'),
             'stores': path.resolve(PATH_SRC, 'stores'),
@@ -45,7 +52,11 @@ module.exports = {
             'components': path.resolve(PATH_SRC, 'components'),
             'reducers': path.resolve(PATH_SRC, 'reducers'),
             'lib': path.resolve(PATH_SRC, 'lib'),
-            'styles': path.resolve(PATH_SRC, 'styles')
+            'styles': path.resolve(PATH_SRC, 'styles'),
+            'images': path.resolve(PATH_SRC, 'images'),
+
+            'icons': path.resolve(__dirname, 'node_modules/origami-icons'),
+            'origami-css': path.resolve(__dirname, 'node_modules/origami-css')
         }
     },
     plugins: [new HTMLWebpackPlugin({

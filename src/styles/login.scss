@@ -1,0 +1,11 @@
+@import "~origami-css/variables";
+@import "~origami-css/helpers";
+
+.page.login {
+    background-image: url('~images/patterns/waves.svg');
+
+    .center {
+        width: 32rem;
+        border: 1px solid color('main-soft-extra');
+    }
+}

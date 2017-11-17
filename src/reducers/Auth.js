@@ -7,16 +7,25 @@ import {
     AUTH_CLEAR,
     AUTH_VERIFIED,
     AUTH_LOGIN,
+    AUTH_LOGIN_FAILED,
     AUTH_LOGOUT
 } from 'actions/const';
 
-const LS_JWT = 'token';
+import {
+    LS_JWT,
+    LS_EMAIL
+} from 'const';
+
+
 const intitialState = immutable({
     loggedIn: false,
     token: localStorage.getItem(LS_JWT),
     loading: {
         verifying: false,
         loggingIn: false
+    },
+    errors: {
+        loggingIn: null
     }
 });
 
@@ -38,11 +47,20 @@ export default (state = intitialState, action) => {
 
         case AUTH_VERIFIED:
         case AUTH_LOGIN:
-            console.log(action);
-            return state.merge({
-                loggedIn: true,
-                token: action.token
-            })
+            const merging = {
+                loggedIn: true
+            };
+
+            if (action.token) {
+                localStorage.setItem(LS_JWT, action.token);
+                localStorage.setItem(LS_EMAIL, action.email);
+                merging.token = action.token;
+            }
+
+            return state.merge(merging);
+
+        case AUTH_LOGIN_FAILED:
+            return state.setIn(['errors', 'loggingIn'], action.message);
         default:
             return state;
     }

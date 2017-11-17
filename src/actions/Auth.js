@@ -1,4 +1,5 @@
 import API from 'lib/API/API';
+import CODES from 'http-status-codes';
 
 
 import {
@@ -8,35 +9,43 @@ import {
     AUTH_VERIFIED,
     AUTH_VERIFIED_FAILED,
     AUTH_LOGIN,
-    AUTH_LOGIN_FAILED
+    AUTH_LOGIN_FAILED,
+    AUTH_LOGOUT,
+
+    ME_EMAIL_SET
 } from 'actions/const';
 
 
 export const login = (email, password) =>
     async dispatch => {
+        dispatch({type: ME_EMAIL_SET, email});
         dispatch({type: AUTH_LOADING_SET_LOGGINGIN, loading: true});
-        const {status, message, data} = await API.post('/auth/login', {
+        const {statusCode, message, data} = await API.post('/auth/login', {
             email, password
         });
 
-        if (status != 200) dispatch({type: AUTH_LOGIN_FAILED, message});
+        if (statusCode != CODES.OK) dispatch({type: AUTH_LOGIN_FAILED, message});
         else dispatch({type: AUTH_LOGIN, ...data});
 
         dispatch({type: AUTH_LOADING_SET_LOGGINGIN, loading: false});
-        return res;
+
+        return data;
     };
 
 export const verify = () =>
     async dispatch => {
-        const {status, data} = await API.post('/auth/verify');
-
-        if (status != 200) {
-            dispatch({type: AUTH_CLEAR});
-
-            return false;
-        } else {
+        try {
+            const {statusCode, data} = await API.get('/auth/verify');
             dispatch({type: AUTH_VERIFIED});
 
             return data.token;
+
+        } catch (e) {
+            if (e.code === CODES.UNAUTHORIZED) dispatch({type: AUTH_CLEAR});
+
+            return false;
         }
     };
+
+export const logout = () =>
+    dispatch => dispatch({type: AUTH_LOGOUT});

@@ -1,0 +1,15 @@
+$sidebar-width: 24rem;
+aside {
+    position: fixed;
+    left: 0;
+    top: 4rem;
+    height: 100%;
+    width: $sidebar-width;
+    background: $gradient-main;
+    box-shadow: 0.2rem 0rem 0.4rem rgba(color('main-dark'), 0.4);
+    z-index: 100;
+
+    & + main {
+        margin-left: $sidebar-width;
+    }
+}

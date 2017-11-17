@@ -1,0 +1,15 @@
+@import "~origami-css";
+
+@import "components/import";
+
+
+html {
+    background-color: color('white-off');
+    // overflow: hidden;
+    height: 100%;
+
+    body {
+        height: 100%;
+        overflow: auto;
+    }
+}

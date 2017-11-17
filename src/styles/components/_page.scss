@@ -1,0 +1,27 @@
+.page {
+    .content {
+        padding: 8rem 4rem;
+
+        &.cover {
+            top: 4rem;
+            height: calc(100% - 4rem);
+
+            & > div > header {
+                padding: 0 size('super');
+                margin-bottom: size('super');
+
+
+                h2, small {
+                    display: inline-block;
+                }
+                h2 {
+                    margin-right: size('xlarge');
+                }
+                small {
+                    vertical-align: text-bottom;
+                }
+            }
+        }
+
+    }
+}
