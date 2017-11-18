@@ -48,6 +48,7 @@ class ListHeader extends React.Component {
         if (!length) {
             b('add', 'alt', `Create ${this.resSingular}`, `/${this.resPlural}/create`);
         } else {
+            if (length === 1) b('remove', 'alt', null, `/${this.resPlural}/${this.selected[0].id}`);
             b('remove', 'error', null, this.remove.bind(this));
         }
 
@@ -55,7 +56,7 @@ class ListHeader extends React.Component {
     }
 
     remove() {
-        this.props.actions[`${this.resPlural}Remove`](this.selected[0].id);
+        this.props.actions[`${this.resPlural}Remove`](this.selected.map(i => i.id));
     }
 
     render() {

@@ -87,15 +87,20 @@ export default class Resource {
     }
 
     remove() {
-        return id =>
-            dispatch =>
-                API.delete(`/${this.lower}/${id}`)
-                    .then(() => {
-                        dispatch({type: `${this.upper}_REMOVED`, id});
-                    })
-                    .catch(error => {
-                        dispatch({type: `${this.upper}_REMOVED_ERROR`, error});
-                    });
+        return idOrArray =>
+            dispatch => {
+                const run = _id => {
+                    API.delete(`/${this.lower}/${_id}`)
+                        .then(() => {
+                            dispatch({type: `${this.upper}_REMOVED`, id: _id});
+                        })
+                        .catch(error => {
+                            dispatch({type: `${this.upper}_REMOVED_ERROR`, error});
+                        });
+                };
+                if (typeof idOrArray === 'string') run(idOrArray);
+                else idOrArray.forEach(run);
+            };
     }
 
     _qs(...rest) {
