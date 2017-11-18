@@ -6,7 +6,7 @@ import {upperFirst} from 'lodash';
 
 
 import actions from 'actions';
-import {Main} from 'components/structure';
+import {PageContent, Main} from 'components/structure';
 import {Loader, Button} from 'components/ui';
 
 
@@ -73,22 +73,24 @@ class CreatePage extends React.Component {
     render() {
         const {loading} = this.props.templates;
 
-        return <Main title="Create a page">
-            <Form
-                className="full-field-width"
-                schema={this.formSchemaTemplate}
-                noHtml5Validate={true}
-                showErrorList={false}
-                formData={this.state.formData}
-                onChange={this.updateTemplate.bind(this)}
-                onSubmit={this.submit.bind(this)}
-                ref={f => this.formTemplate = f}
-            >
-                {this.template && <Button icon="add">Create page </Button>}
-                <span />
-            </Form>
-            {loading.single && <Loader />}
-        </Main>;
+        return <PageContent>
+            <Main title="Create a page">
+                <Form
+                    className="full-field-width"
+                    schema={this.formSchemaTemplate}
+                    noHtml5Validate={true}
+                    showErrorList={false}
+                    formData={this.state.formData}
+                    onChange={this.updateTemplate.bind(this)}
+                    onSubmit={this.submit.bind(this)}
+                    ref={f => this.formTemplate = f}
+                >
+                    {this.template && <Button icon="add">Create page </Button>}
+                    <span />
+                </Form>
+                {loading.single && <Loader />}
+            </Main>
+        </PageContent>;
     }
 
     updateTemplate({formData}) {

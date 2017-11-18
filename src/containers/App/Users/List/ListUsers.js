@@ -3,12 +3,20 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 
 import {ResourceTable, Column} from 'components/ui';
-import {ListHeader} from 'components/structure';
+import {ListHeader, PageContent} from 'components/structure';
 
 import actions from 'actions';
 const {Users: UserActions, App: AppActions} = actions;
 
 class ListUsers extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            selected: []
+        };
+    }
+
     async componentWillMount() {
         await this.getList();
     }
@@ -19,17 +27,22 @@ class ListUsers extends React.Component {
 
 
     render() {
-        return <div>
-            <ListHeader resource="users" length={this.users.length}/>
-            <ResourceTable
-                data={this.users}
-                onRowClick={r => this.open(r)}
-            >
-                <Column dataKey="fname" heading="First name"/>
-                <Column dataKey="lname" heading="Last name"/>
-                <Column dataKey="email" />
-            </ResourceTable>
-        </div>;
+        const error = this.users.length ? null : 'no-data';
+
+        return <PageContent resource="user" error={error} loading={!this.props.users.loadedInitial}>
+            <div className="wrapper">
+                <ListHeader resource="users" data={this.users} selected={this.state.selected} />
+                <ResourceTable
+                    data={this.users}
+                    onRowClick={r => this.open(r)}
+                    onChange={this.updateButtons.bind(this)}
+                >
+                    <Column dataKey="fname" heading="First name"/>
+                    <Column dataKey="lname" heading="Last name"/>
+                    <Column dataKey="email" />
+                </ResourceTable>
+            </div>
+        </PageContent>;
     }
 
     async getList() {
@@ -39,6 +52,10 @@ class ListUsers extends React.Component {
     open(row) {
         this.props.actions.tabsNew(`/users/${row.id}`);
         this.props.history.push(`/users/${row.id}`);
+    }
+
+    updateButtons(selected) {
+        this.setState({selected});
     }
 }
 

@@ -6,11 +6,13 @@ import {Switch, Route} from 'react-router';
 
 import ListUsers from './List';
 import EditUser from './Edit';
+import CreateUser from './Create';
 
 
 class Users extends React.Component {
     render() {
         return <Switch>
+            <Route path='/users/create' render={props => <CreateUser {...props} />} />
             <Route path='/users/:userId' render={props => <EditUser {...props} />} />
             <Route path='/users/' render={props => <ListUsers {...props} />} />
         </Switch>;

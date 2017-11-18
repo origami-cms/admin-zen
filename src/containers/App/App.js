@@ -37,20 +37,18 @@ class AppPage extends React.Component {
     render() {
         return <Page>
             <Header />
-            <div className="content cover">
-                <Switch>
-                    {routes.map(r =>
-                        <Route
-                            key={r.url}
-                            path={r.url}
-                            exact={r.exact}
-                            render={props =>
-                                <r.component {...props} />
-                            }
-                        />
-                    )}
-                </Switch>
-            </div>
+            <Switch>
+                {routes.map(r =>
+                    <Route
+                        key={r.url}
+                        path={r.url}
+                        exact={r.exact}
+                        render={props =>
+                            <r.component {...props} />
+                        }
+                    />
+                )}
+            </Switch>
         </Page>;
     }
 }

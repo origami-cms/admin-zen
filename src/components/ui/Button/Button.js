@@ -18,7 +18,8 @@ class Button extends React.Component {
             color,
             size,
             icon,
-            iconColor
+            iconColor,
+            children
         } = this.props;
 
         const classes = {
@@ -27,13 +28,14 @@ class Button extends React.Component {
 
         if (size) classes[size] = true;
         if (icon) classes['has-icon'] = true;
+        if (!children) classes['no-text'] = true;
 
         return <button
             className={classnames(classes, this.props.className)}
             onClick={this.onClick.bind(this)}
         >
             {icon && <Icon type={icon} color={iconColor} size='large'/>}
-            {this.props.children}
+            {children}
         </button>;
     }
 

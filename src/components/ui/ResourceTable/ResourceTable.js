@@ -1,12 +1,16 @@
 import React from 'react';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
+import immutable from 'seamless-immutable';
+
 
 import {Checkbox, Icon} from 'components/ui';
+
 
 export default class ResourceTable extends React.Component {
     static propTypes = {
         onRowClick: PropTypes.func,
+        onChange: PropTypes.func,
         striped: PropTypes.bool,
         dataId: PropTypes.string
     }
@@ -20,19 +24,29 @@ export default class ResourceTable extends React.Component {
         super(props);
 
         this.state = {
-            selected: []
+            selected: immutable([])
         };
     }
 
 
     get allSelected() {
+        if (!this.props.data.length) return false;
+
         return this.state.selected.length === this.props.data.length;
+    }
+
+    componentDidUpdate(props, state) {
+        if (state.selected != this.state.selected && this.props.onChange) {
+            const data = this.props.data.filter(
+                d => this.state.selected.includes(d[this.props.dataId])
+            );
+            this.props.onChange(data);
+        }
     }
 
 
     render() {
         const classes = {
-            selectable: this.props.onRowClick,
             striped: this.props.striped,
             'rows-split': true
         };
@@ -78,7 +92,7 @@ export default class ResourceTable extends React.Component {
                 </td>)}
 
                 <td className="icon" onClick={() => this.onRowClick(entry)}>
-                    <Icon type='arrow-right' />
+                    <Icon type='arrow-right' color="alt"/>
                 </td>
             </tr>;
         });
@@ -99,8 +113,7 @@ export default class ResourceTable extends React.Component {
         if (s.includes(id)) {
             this.setState({selected: s.filter(_id => id != _id)});
         } else {
-            s.push(id);
-            this.setState({selected: s});
+            this.setState({selected: s.concat(id)});
         }
     }
 }

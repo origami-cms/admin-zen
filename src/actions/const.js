@@ -24,6 +24,8 @@ export const ME_EMAIL_SET = 'ME_EMAIL_SET';
 
 // ----------------------------------------------------------------------- Pages
 export const PAGES_SET = 'PAGES_SET';
+export const PAGES_UPDATED = 'PAGES_UPDATED';
+export const PAGES_REMOVED = 'PAGES_REMOVED';
 export const PAGE_PROPERTIES_SET = 'PAGE_PROPERTIES_SET';
 export const PAGE_DATA_SET = 'PAGE_DATA_SET';
 
@@ -38,4 +40,6 @@ export const TEMPLATES_LOADING_ALL_END = 'TEMPLATES_LOADING_ALL_END';
 
 // ----------------------------------------------------------------------- Users
 export const USERS_SET = 'USERS_SET';
+export const USERS_CREATED = 'USERS_CREATED';
 export const USERS_UPDATED = 'USERS_UPDATED';
+export const USERS_REMOVED = 'USERS_REMOVED';

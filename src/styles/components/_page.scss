@@ -2,10 +2,14 @@
     .content {
         padding: 8rem 4rem;
 
+        .wrapper {
+            max-width: 80rem;
+            margin: auto;
+        }
+
         &.cover {
             top: 4rem;
             height: calc(100% - 4rem);
-
             & > div > header {
                 padding: 0 size('super');
                 margin-bottom: size('super');
