@@ -2,7 +2,7 @@ import React from 'react';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
 import immutable from 'seamless-immutable';
-
+import _ from 'lodash';
 
 import {Checkbox, Icon} from 'components/ui';
 
@@ -48,7 +48,8 @@ export default class ResourceTable extends React.Component {
     render() {
         const classes = {
             striped: this.props.striped,
-            'rows-split': true
+            'rows-split': true,
+            'no-select': true
         };
 
         return <table className={classnames(classes, this.props.className)}>
@@ -83,7 +84,7 @@ export default class ResourceTable extends React.Component {
                 <td className="icon">
                     <Checkbox
                         value={selected.includes(id)}
-                        onChange={() => this.select(id)}
+                        onClick={e => this.select(e, id, i)}
                     />
                 </td>
 
@@ -108,12 +109,37 @@ export default class ResourceTable extends React.Component {
         });
     }
 
-    select(id) {
+    select(e, id, i) {
         const {selected: s} = this.state;
-        if (s.includes(id)) {
-            this.setState({selected: s.filter(_id => id != _id)});
+        const turnOff = s.includes(id);
+
+        if (e.shiftKey) {
+            if (!this.state.clickIndex) this.setState({clickIndex: i});
+
+            const d = this.props.data;
+            let i1 = this.state.clickIndex;
+            let i2 = i;
+
+            if (i1 != null) {
+                // Flip indexes if i1 is larger
+                [i1, i2] = [i1, i2].sort();
+
+                const select = d.slice(i1, i2 - i1 + 1).map(_e => _e.id);
+
+                if (this.state.clickOff) {
+                    this.setState({selected: _.uniq(s.filter(_e => !select.includes(_e)))});
+                } else {
+                    this.setState({selected: _.uniq(s.concat(select))});
+                }
+            }
         } else {
-            this.setState({selected: s.concat(id)});
+            // Reset the clickIndex if no shift key is pressed
+            this.setState({clickIndex: i, clickOff: turnOff});
+            if (turnOff) {
+                this.setState({selected: s.filter(_id => id != _id)});
+            } else {
+                this.setState({selected: s.concat(id)});
+            }
         }
     }
 }

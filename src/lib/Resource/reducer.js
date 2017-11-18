@@ -43,7 +43,6 @@ export default (resource, func, key = 'id') => {
 
 
             case constants[`${up}_REMOVED`]:
-                console.log('REMOVED', action, resourceList.filter(u => u[key] != action[key]));
                 return state.set(
                     resource,
                     resourceList.filter(u => u[key] != action[key])
