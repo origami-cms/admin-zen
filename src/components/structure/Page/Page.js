@@ -20,7 +20,7 @@ class Page extends React.Component {
         }
         const classes = {
             page: true,
-            cover: true,
+            cover: true
         };
         if (this.props.name) classes[this.props.name] = true;
 

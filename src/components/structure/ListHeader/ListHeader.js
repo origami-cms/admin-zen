@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'; // eslint-disable-line
 import {singular, plural} from 'pluralize';
 import {upperFirst} from 'lodash';
 

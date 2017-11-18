@@ -1,5 +1,6 @@
 import 'whatwg-fetch';
 import {SERVER_API} from '../../const';
+import CODES from 'http-status-codes';
 
 // Wraps API calls, sets the JWT in headers, basename etc
 export default new class API {
@@ -82,7 +83,7 @@ export default new class API {
         return fetch(this.base + url, conf)
             .then(r => r.json())
             .then(res => {
-                if (res.statusCode >= 400) {
+                if (res.statusCode >= CODES.BAD_REQUEST) {
                     const err = new Error(res.message);
                     err.code = res.statusCode;
 

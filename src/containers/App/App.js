@@ -55,8 +55,7 @@ class AppPage extends React.Component {
     }
 }
 
-const matchStateToProps = state => ({
-});
+const matchStateToProps = () => ({});
 
 const matchDispatchToProps = dispatch => ({
     actions: bindActionCreators({

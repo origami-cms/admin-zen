@@ -1,10 +1,9 @@
-import React, {Component} from 'react'; // eslint-disable-line no-unused-vars
-import PropTypes from 'prop-types';
+import React from 'react';
 import {connect} from 'react-redux';
 
 import {Tabs} from '../';
 
-export class Sidebar extends Component {
+export class Sidebar extends React.Component {
     render() {
         return (
             <aside>
@@ -16,7 +15,7 @@ export class Sidebar extends Component {
     }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = () => ({
 
 });
 

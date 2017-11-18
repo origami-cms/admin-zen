@@ -3,7 +3,7 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router';
 
-import {Jewel, Icon} from 'components/ui';
+import {Jewel} from 'components/ui';
 
 import HeaderTabs from './HeaderTabs';
 import HeaderMe from './HeaderMe';

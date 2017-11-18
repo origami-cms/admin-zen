@@ -1,6 +1,6 @@
-import React, {Component} from 'react'; // eslint-disable-line no-unused-vars
+import React from 'react';
 
-export default class Tab extends Component {
+export default class Tab extends React.Component {
     render() {
         return <div className="tab">
             {this.props.children}

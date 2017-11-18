@@ -5,7 +5,6 @@ import {BrowserRouter, Route, Switch} from 'react-router-dom';
 
 import App from 'containers/App';
 import Login from 'containers/Login';
-import Actions from 'actions';
 
 class Router extends React.Component {
 

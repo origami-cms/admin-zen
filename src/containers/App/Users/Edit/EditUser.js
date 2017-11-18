@@ -4,12 +4,9 @@ import {connect} from 'react-redux';
 
 import actions from 'actions';
 import {PageContent, Main} from 'components/structure';
-import {Sidebar, Tab} from 'components/ui';
 const {Users: UserActions, App: AppActions} = actions;
 
 import EditForm from './EditForm';
-import EditPropertiesForm from './EditPropertiesForm';
-import {toForm} from './propertiesFormConverter';
 
 
 class EditUser extends React.Component {

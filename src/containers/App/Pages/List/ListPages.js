@@ -14,7 +14,7 @@ class ListPages extends React.Component {
     }
 
     get pages() {
-        // console.log(this.props.pages);
+        // Console.log(this.props.pages);
         if (!this.props.pages.pages.length) return [];
 
         return this.props.pages.pages.asMutable({deep: true});

@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'; // eslint-disable-line
 import classnames from 'classnames';
 import {withRouter} from 'react-router';
 
@@ -18,8 +18,7 @@ class Button extends React.Component {
             color,
             size,
             icon,
-            iconColor,
-            to
+            iconColor
         } = this.props;
 
         const classes = {

@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import Form from 'react-jsonschema-form';
@@ -6,7 +6,7 @@ import Form from 'react-jsonschema-form';
 
 import actions from 'actions';
 
-export class EditPropertiesForm extends Component {
+export class EditPropertiesForm extends React.Component {
     render() {
         if (!this.props.schema.schema.required.length) return null;
         else return <div>
@@ -26,7 +26,7 @@ export class EditPropertiesForm extends Component {
     }
 }
 
-const mapStateToProps = state => ({});
+const mapStateToProps = () => ({});
 
 const matchDispatchToProps = dispatch => ({
     actions: bindActionCreators({

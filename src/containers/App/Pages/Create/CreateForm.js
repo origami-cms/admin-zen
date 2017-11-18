@@ -1,12 +1,12 @@
-import React, {Component} from 'react';
-import { bindActionCreators } from 'redux';
+import React from 'react';
+import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import Form from 'react-jsonschema-form';
 
 
 import actions from 'actions';
 
-export class EditForm extends Component {
+export class EditForm extends React.Component {
     constructor(props) {
         super(props);
 
@@ -45,7 +45,7 @@ export class EditForm extends Component {
     }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = () => ({
 
 });
 

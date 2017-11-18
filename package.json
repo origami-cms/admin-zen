@@ -9,7 +9,8 @@
   "scripts": {
     "prepare": "npm run build",
     "build": "webpack",
-    "start": "webpack -w"
+    "start": "webpack -w",
+    "lint": "eslint src/ --quiet"
   },
   "dependencies": {
     "classname": "^0.0.0",

@@ -1,7 +1,6 @@
 import _ from 'lodash';
 export const toForm = properties => {
     const ui = {};
-    const required = [];
     const newProps = _.mapValues(_.cloneDeep(properties), (v, k) => {
         v.title = v.label;
         delete v.label;

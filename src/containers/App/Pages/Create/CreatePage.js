@@ -4,13 +4,14 @@ import {connect} from 'react-redux';
 import Form from 'react-jsonschema-form';
 import {upperFirst} from 'lodash';
 
+
 import actions from 'actions';
 import {Main} from 'components/structure';
 import {Loader, Button} from 'components/ui';
 
 
-import CreateForm from './CreateForm';
 import {toForm} from './propertiesFormConverter';
+
 
 class CreatePage extends React.Component {
     constructor(props) {
@@ -99,7 +100,6 @@ class CreatePage extends React.Component {
         const data = {...formData};
         data.type = data.template;
         delete data.template;
-        console.log(formData, data);
         this.props.actions.pagesCreate(data);
     }
 }

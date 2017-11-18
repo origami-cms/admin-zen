@@ -15,7 +15,7 @@ class HeaderTabs extends React.Component {
 
     // Generate a tab
     tab(t) {
-        const active = t.url === this.props.location.pathname
+        const active = t.url === this.props.location.pathname;
         const classes = {
             tab: true,
             active

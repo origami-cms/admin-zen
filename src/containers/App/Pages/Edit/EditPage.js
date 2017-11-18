@@ -6,7 +6,6 @@ import actions from 'actions';
 import {PageContent, Main} from 'components/structure';
 import {Sidebar, Tab} from 'components/ui';
 const {Pages: PageActions, App: AppActions} = actions;
-console.log(PageContent);
 
 import EditForm from './EditForm';
 import EditPropertiesForm from './EditPropertiesForm';

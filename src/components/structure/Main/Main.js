@@ -12,11 +12,11 @@ export default class Main extends React.Component {
             'center-h': !this.props.sidebar
         };
 
-        return <main className={classnames("rounded padding-super", classes, this.props.className)}>
+        return <main className={classnames('rounded padding-super', classes, this.props.className)}>
             <header>
                 <h2>{this.props.title}</h2>
             </header>
             {this.props.children}
-        </main>
+        </main>;
     }
 }

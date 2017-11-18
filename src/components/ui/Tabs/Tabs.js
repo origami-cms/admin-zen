@@ -1,10 +1,10 @@
-import React, {Component} from 'react'; // eslint-disable-line no-unused-vars
+import React from 'react';
 import classnames from 'classnames';
 import {Tab} from './Tab';
 import {Icon} from '../';
 import limitChidren from 'lib/limitChildren';
 
-export default class Tabs extends Component {
+export default class Tabs extends React.Component {
     constructor(props) {
         super(props);
 

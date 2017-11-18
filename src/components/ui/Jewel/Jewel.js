@@ -12,7 +12,7 @@ import Icon from '../Icon';
 
 class Jewel extends React.Component {
     constructor(props) {
-        super(props)
+        super(props);
 
         this.state = {
             active: false
@@ -30,7 +30,7 @@ class Jewel extends React.Component {
         };
 
         return <div
-            className={classnames("jewel no-select", classes)}
+            className={classnames('jewel no-select', classes)}
             onClick={this.toggleActive.bind(this)}
         >
             <img src={logo} />

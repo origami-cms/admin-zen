@@ -2,7 +2,7 @@ import React from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 
-import {ResourceTable, Column, Button} from 'components/ui';
+import {ResourceTable, Column} from 'components/ui';
 import {ListHeader} from 'components/structure';
 
 import actions from 'actions';

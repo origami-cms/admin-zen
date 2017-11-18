@@ -1,6 +1,6 @@
 import 'styles/app.scss';
 
-import React from 'react';
+import React from 'react'; // eslint-disable-line no-unused-vars
 import ReactDOM from 'react-dom';
 import {AppContainer} from 'react-hot-loader';
 import {Provider} from 'react-redux';
@@ -8,7 +8,7 @@ import {Provider} from 'react-redux';
 
 import Router from 'router';
 import store from 'stores';
-console.log('here');
+
 const node = document.getElementById('app');
 ReactDOM.render(
     <AppContainer>

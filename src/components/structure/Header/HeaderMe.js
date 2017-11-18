@@ -3,7 +3,6 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router';
 
-import {Icon} from 'components/ui';
 
 class HeaderMe extends React.Component {
     render() {
