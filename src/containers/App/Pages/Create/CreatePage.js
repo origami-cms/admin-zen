@@ -73,7 +73,7 @@ class CreatePage extends React.Component {
     render() {
         const {loading} = this.props.templates;
 
-        return <PageContent>
+        return <PageContent resource="page">
             <Main title="Create a page">
                 <Form
                     className="full-field-width"
@@ -98,11 +98,13 @@ class CreatePage extends React.Component {
         this.setState({formData});
     }
 
-    submit({formData}) {
+    async submit({formData}) {
         const data = {...formData};
-        data.type = data.template;
+        data.type = data.template.toLowerCase();
         delete data.template;
-        this.props.actions.pagesCreate(data);
+        const {id} = await this.props.actions.pagesCreate(data);
+
+        this.props.history.push(`/pages/${id}`);
     }
 }
 

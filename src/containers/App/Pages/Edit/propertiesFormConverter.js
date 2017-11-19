@@ -5,14 +5,19 @@ export const toForm = properties => {
         v.title = v.label;
         delete v.label;
 
-        if (v.type === 'array') {
-            v.items = v.children;
-            delete v.children;
-            ui[k] = {
-                'items': {
-                    'ui:emptyValue': ''
-                }
-            };
+        switch (v.type) {
+            case 'array':
+                v.items = v.children;
+                delete v.children;
+                ui[k] = {
+                    'items': {
+                        'ui:emptyValue': ''
+                    }
+                };
+                break;
+            case 'textarea':
+                v.type = 'string';
+                ui[k] = {'ui:widget': 'textarea'};
         }
 
         return v;
