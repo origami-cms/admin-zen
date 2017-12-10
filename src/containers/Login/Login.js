@@ -23,8 +23,7 @@ class Login extends React.Component {
                 type: 'email',
                 name: 'email',
                 placeholder: 'Email',
-                icon: 'mail',
-                default: this.props.me.email
+                icon: 'mail'
             },
             {
                 name: 'password',
@@ -52,6 +51,7 @@ class Login extends React.Component {
                     fields={this.formSchema}
                     onSubmit={this.submit.bind(this)}
                     error={loggingIn}
+                    values={{email: this.props.me.email}}
                 />
             </div>
         </Page>;

@@ -36,6 +36,7 @@ export default (state = intitialState, action) => {
         case AUTH_LOADING_SET_LOGGINGIN:
             return state.setIn(['loading', 'loggingIn'], action.loading);
 
+
         case AUTH_LOGOUT:
         case AUTH_CLEAR:
             localStorage.removeItem(LS_JWT);
@@ -45,6 +46,7 @@ export default (state = intitialState, action) => {
                 token: null
             });
 
+
         case AUTH_VERIFIED:
         case AUTH_LOGIN:
             const merging = {
@@ -53,14 +55,17 @@ export default (state = intitialState, action) => {
 
             if (action.token) {
                 localStorage.setItem(LS_JWT, action.token);
-                localStorage.setItem(LS_EMAIL, action.email);
                 merging.token = action.token;
             }
+            if (action.email) localStorage.setItem(LS_EMAIL, action.email);
 
             return state.merge(merging);
 
+
         case AUTH_LOGIN_FAILED:
             return state.setIn(['errors', 'loggingIn'], action.message);
+
+
         default:
             return state;
     }

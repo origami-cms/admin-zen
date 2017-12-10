@@ -46,7 +46,8 @@ export const verify = () =>
             return data.token;
 
         } catch (e) {
-            if (e.code === CODES.UNAUTHORIZED) dispatch({type: AUTH_CLEAR});
+            if (e.code === CODES.UNAUTHORIZED || e.code === CODES.BAD_REQUEST)
+                dispatch({type: AUTH_CLEAR});
 
             return false;
         }
