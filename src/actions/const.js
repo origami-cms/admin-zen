@@ -29,6 +29,8 @@ export const PAGES_REMOVED = 'PAGES_REMOVED';
 export const PAGE_PROPERTIES_SET = 'PAGE_PROPERTIES_SET';
 export const PAGE_DATA_SET = 'PAGE_DATA_SET';
 
+export const PAGES_TREE_SET = 'PAGES_TREE_SET';
+
 
 // ------------------------------------------------------------------- Templates
 export const TEMPLATES_SET = 'TEMPLATES_SET';

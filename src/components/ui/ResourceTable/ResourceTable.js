@@ -74,16 +74,21 @@ export default class ResourceTable extends React.Component {
     }
 
     get rows() {
-        const {selected} = this.state;
+        const {selected: selectedItems} = this.state;
         const {dataId} = this.props;
 
         return this.props.data.map((entry, i) => {
             const id = entry[dataId];
+            const selected = selectedItems.includes(id);
 
-            return <tr key={i}>
+            const classes = {
+                selected
+            };
+
+            return <tr key={i} className={classnames(classes)}>
                 <td className="icon">
                     <Checkbox
-                        value={selected.includes(id)}
+                        value={selected}
                         onClick={e => this.select(e, id, i)}
                     />
                 </td>

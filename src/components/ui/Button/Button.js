@@ -3,7 +3,7 @@ import classnames from 'classnames';
 import {withRouter} from 'react-router';
 
 
-import {Icon} from 'components/ui';
+import {Icon, Loader} from 'components/ui';
 
 
 class Button extends React.Component {
@@ -19,7 +19,9 @@ class Button extends React.Component {
             size,
             icon,
             iconColor,
-            children
+            children,
+            disabled,
+            loading
         } = this.props;
 
         const classes = {
@@ -27,15 +29,17 @@ class Button extends React.Component {
         };
 
         if (size) classes[size] = true;
-        if (icon) classes['has-icon'] = true;
+        if (icon || loading) classes['has-icon'] = true;
         if (!children) classes['no-text'] = true;
 
         return <button
             className={classnames(classes, this.props.className)}
             onClick={this.onClick.bind(this)}
+            disabled={disabled || loading}
         >
-            {icon && <Icon type={icon} color={iconColor} size='large'/>}
-            {children}
+            {icon && !loading && <Icon type={icon} color={iconColor} size='large'/>}
+            {loading && <Loader color={iconColor} size='main'/>}
+            <span>{children}</span>
         </button>;
     }
 

@@ -1,0 +1,15 @@
+.page-tree {
+    li {
+        $multiplier: 2rem;
+        $default-padding: 2rem;
+        padding-left: $default-padding;
+
+        @for $i from 0 through 15 {
+            &.depth-#{$i} {
+                padding-left: $i * $multiplier + $default-padding;
+                line-height: size('super');
+                height: size('super');
+            }
+        }
+    }
+}

@@ -4,12 +4,10 @@ import {connect} from 'react-redux';
 
 import actions from 'actions';
 import {PageContent, Main} from 'components/structure';
-import {Sidebar, Tab} from 'components/ui';
 const {Pages: PageActions, App: AppActions} = actions;
 
+
 import EditForm from './EditForm';
-import EditPropertiesForm from './EditPropertiesForm';
-import {toForm} from './propertiesFormConverter';
 
 
 class EditPage extends React.Component {
@@ -23,6 +21,7 @@ class EditPage extends React.Component {
     }
 
     async componentWillMount() {
+        // Get the page
         try {
             const res = await this.props.actions.pagesGet(this.id);
             if (!res) return this.error(404);
@@ -30,12 +29,14 @@ class EditPage extends React.Component {
             return this.error(e);
         }
 
+        // Get the pages properties
         try {
             await this.props.actions.pagesPropertiesGet(this.id);
         } catch (e) {
             return this.error(e);
         }
 
+        // Update the tab name
         this.props.actions.tabsName(this.props.location.pathname, this.page.title);
         this.setState({loading: false});
     }
@@ -65,22 +66,18 @@ class EditPage extends React.Component {
             loading={this.state.loading}
             resource='page'
         >
-            <Sidebar>
+            {/* <Sidebar>
                 <Tab icon='page'>
                     <p> Test </p>
                 </Tab>
                 <Tab icon='settings'>
                     <p> Test 2</p>
                 </Tab>
-            </Sidebar>
+            </Sidebar> */}
 
-            <Main sidebar={true} title={`Edit ${this.page.title}`}>
+            <Main title={`Edit ${this.page.title}`}>
+                <a className="button" href={this.page.url} target="_blank"> Open page </a>
                 <EditForm page={this.page} />
-                <EditPropertiesForm
-                    schema={toForm(this.page.properties)}
-                    data={this.page.data}
-                    id={this.id}
-                />
             </Main>
         </PageContent>;
     }

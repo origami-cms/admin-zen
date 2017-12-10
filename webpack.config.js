@@ -33,12 +33,13 @@ module.exports = {
                 loader: 'html-loader'
             },
             {
-                test: /\.scss$/,
+                test: /\.s?css$/,
                 loader: 'style-loader!css-loader!sass-loader'
             },
             {
                 test: /\.(svg|jpg|png)/,
-                loader: 'file-loader'
+                loader: 'file-loader',
+                exclude: /loading\.svg/
             }
         ]
     },

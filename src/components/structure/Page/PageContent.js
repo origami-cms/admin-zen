@@ -32,8 +32,9 @@ export default withRouter(class PageContent extends React.Component {
     }
 
     get content() {
-        if (this.props.loading) return <Loader />;
+        if (this.props.loading) return <Loader size="super" className="center" />;
         let error;
+
         let action = null;
         const actionBack = <Button color="alt" onClick={() => this.props.history.goBack()}> Go back </Button>;
 

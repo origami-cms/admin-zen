@@ -13,9 +13,18 @@ Object.values(A).forEach(a => {
 });
 
 
+import {ModalConfirm} from 'components/structure';
 import {Button} from 'components/ui';
 
 class ListHeader extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            removing: false
+        };
+    }
+
     static propTypes = {
         data: PropTypes.array.isRequired,
         resource: PropTypes.string.isRequired,
@@ -48,19 +57,20 @@ class ListHeader extends React.Component {
         if (!length) {
             b('add', 'alt', `Create ${this.resSingular}`, `/${this.resPlural}/create`);
         } else {
-            if (length === 1) b('remove', 'alt', null, `/${this.resPlural}/${this.selected[0].id}`);
-            b('remove', 'error', null, this.remove.bind(this));
+            if (length === 1) b('arrow-right', 'alt', null, `/${this.resPlural}/${this.selected[0].id}`);
+            b('remove', 'error', null, () => this.setState({removing: true}));
         }
 
         return buttons;
     }
 
     remove() {
-        this.props.actions[`${this.resPlural}Remove`](this.selected.map(i => i.id));
+        return this.props.actions[`${this.resPlural}Remove`](this.selected.map(i => i.id));
     }
 
     render() {
         const metric = this.data.length === 1 ? this.resSingular : this.resPlural;
+        const metricSelected = this.props.selected.length === 1 ? this.resSingular : this.resPlural;
 
         return <header>
             <h2> {upperFirst(this.resPlural)} </h2>
@@ -69,7 +79,13 @@ class ListHeader extends React.Component {
             </small>
             <div className="button-group float-right">
                 {this.buttons}
+                {this.props.children}
             </div>
+            {this.state.removing && <ModalConfirm
+                onClose={() => this.setState({removing: false})}
+                onConfirm={this.remove.bind(this)}
+                title={`Remove ${this.props.selected.length} ${metricSelected}`}
+            />}
         </header>;
     }
 }

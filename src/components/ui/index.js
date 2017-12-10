@@ -6,4 +6,6 @@ export {Tabs, Tab} from './Tabs';
 export {default as TabLink} from './TabLink';
 export {default as Button} from './Button';
 export {default as Loader} from './Loader';
-export {Checkbox} from './Form';
+export {Form, Checkbox} from './Form';
+export {default as Modal} from './Modal';
+export {default as PageTree} from './PageTree';

@@ -2,11 +2,10 @@ import React from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {Redirect} from 'react-router';
-import Form from 'react-jsonschema-form';
 
 import actions from 'actions';
 import {Page} from 'components/structure';
-import {Button} from 'components/ui';
+import {Form} from 'components/ui';
 
 import 'styles/login.scss';
 import logo from 'images/logo.svg';
@@ -19,23 +18,25 @@ class Login extends React.Component {
     }
 
     get formSchema() {
-        return {
-            type: 'object',
-            required: ['email', 'password'],
-            properties: {
-                email: {
-                    type: 'string',
-                    format: 'email',
-                    title: 'Email',
-                    default: this.props.me.email
-                },
-                password: {
-                    type: 'string',
-                    format: 'password',
-                    title: 'Password'
-                }
+        return [
+            {
+                type: 'email',
+                name: 'email',
+                placeholder: 'Email',
+                icon: 'mail',
+                default: this.props.me.email
+            },
+            {
+                name: 'password',
+                type: 'password',
+                placeholder: 'Password',
+                icon: 'lock'
+            },
+            {
+                type: 'submit',
+                value: 'Login'
             }
-        };
+        ];
     }
 
     render() {
@@ -45,19 +46,18 @@ class Login extends React.Component {
         return <Page name="login">
             <div className="center background-white padding-super rounded">
                 <img src={logo} className="margin-v-super"/>
-                <span className="color-error margin-b-small">{loggingIn}</span>
                 <Form
+                    disabled={this.props.auth.loading.loggingIn}
                     className="full-field-width"
-                    schema={this.formSchema}
-                    noHtml5Validate={true}
-                    showErrorList={false}
+                    fields={this.formSchema}
                     onSubmit={this.submit.bind(this)}
-                ><Button>Login</Button></Form>
+                    error={loggingIn}
+                />
             </div>
         </Page>;
     }
 
-    submit({formData: {email, password}}) {
+    submit({email, password}) {
         this.props.actions.login(email, password);
     }
 }

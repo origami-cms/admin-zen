@@ -29,6 +29,8 @@ export const login = (email, password) =>
 
             return data;
         } catch (e) {
+            dispatch({type: AUTH_LOADING_SET_LOGGINGIN, loading: false});
+
             return dispatch({type: AUTH_LOGIN_FAILED, message: e.message});
         }
 
